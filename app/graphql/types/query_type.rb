@@ -28,4 +28,9 @@ class Types::QueryType < Types::BaseObject
   def my_integer_field
     13
   end
+
+  field :users, [Types::UserType], null: false
+  def users
+    User.all
+  end
 end
