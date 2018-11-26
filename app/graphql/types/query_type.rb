@@ -33,4 +33,16 @@ class Types::QueryType < Types::BaseObject
   def users
     User.all
   end
+
+  field :user, Types::UserType, null: true do
+    argument :id, ID, required: true
+  end
+  def user(id:)
+    User.find(id)
+  rescue ActiveRecord::RecordNotFound => error
+    raise GraphQL::ExecutionError.new(
+      error.message,
+      extensions: { "code" => "NOT_FOUND" }
+    )
+  end
 end
