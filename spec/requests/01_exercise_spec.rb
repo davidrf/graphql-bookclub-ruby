@@ -6,7 +6,7 @@ RSpec.describe "exercise 1", type: :request do
     { query: query }
   end
 
-  xit "should return the expected response" do
+  it "should return the expected response" do
     post(graphql_url, params: params)
 
     expect(response).to have_http_status :ok
