@@ -45,4 +45,16 @@ class Types::QueryType < Types::BaseObject
       extensions: { "code" => "NOT_FOUND" }
     )
   end
+
+  field :repository, Types::RepositoryType, null: true do
+    argument :id, ID, required: true
+  end
+  def repository(id:)
+    Repository.find(id)
+  rescue ActiveRecord::RecordNotFound => error
+    raise GraphQL::ExecutionError.new(
+      error.message,
+      extensions: { "code" => "NOT_FOUND" }
+    )
+  end
 end
