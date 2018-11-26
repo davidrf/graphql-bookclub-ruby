@@ -8,4 +8,9 @@ class Types::QueryType < Types::BaseObject
   def test_field
     "Hello World!"
   end
+
+  field :my_text_field, String, null: false
+  def my_text_field
+    "bookclub rulz"
+  end
 end
