@@ -3,7 +3,10 @@ class Types::QueryType < Types::BaseObject
   # They will be entry points for queries on your schema.
   field :current_user, Types::UserType, null: false
   def current_user
-    context[:current_user]
+    Resolvers::QueryType::CurrentUser.perform(
+      context: context,
+      object: object,
+    )
   end
 
   field :users, [Types::UserType], null: false

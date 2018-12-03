@@ -11,7 +11,7 @@ RSpec.describe Resolvers::QueryType::CurrentUser do
       { current_user: user }
     end
 
-    xit "should resolve the current user" do
+    it "should resolve the current user" do
       result = described_class.perform(object: nil, context: context)
       expect(result).to eq(user)
     end
