@@ -10,7 +10,7 @@ RSpec.describe Resolvers::RepositoryType::User do
       { current_user: current_user }
     end
 
-    xit "should return a GraphQL wrapper for a lazily loaded user" do
+    it "should return a GraphQL wrapper for a lazily loaded user" do
       result = described_class.perform(context: context, object: object)
 
       expect(result).to be_a(BatchLoader::GraphQL::Wrapper)

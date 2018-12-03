@@ -16,7 +16,7 @@ RSpec.describe "exercise 5", type: :request do
   end
   let(:resolver_class) { Resolvers::RepositoryType::User }
 
-  xit "should return the expected response" do
+  it "should return the expected response" do
     expect(resolver_class).to receive(:perform).and_call_original.twice
     # called twice and not once because an additional query is made during authentication
     expect(User).to receive(:find_by_sql).and_call_original.twice
