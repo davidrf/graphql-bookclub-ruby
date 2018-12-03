@@ -8,4 +8,10 @@ class User < ApplicationRecord
   def full_name
     "#{first_name} #{last_name}"
   end
+
+  def self.lazy_find(id)
+    BatchLoader.for(id).batch do |ids, loader|
+      where(id: ids).each { |user| loader.call(user.id, user) }
+    end
+  end
 end

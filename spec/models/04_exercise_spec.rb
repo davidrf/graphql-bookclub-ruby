@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  xdescribe ".lazy_find" do
+  describe ".lazy_find" do
     let!(:user_1) { create(:user) }
     let!(:user_2) { create(:user) }
 
