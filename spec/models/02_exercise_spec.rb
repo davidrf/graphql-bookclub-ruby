@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Repository, type: :model do
-  xdescribe ".gen" do
+  describe ".gen" do
     let!(:current_user) { create(:user) }
     let(:id) { repository.id }
 
