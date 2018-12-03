@@ -1,6 +1,0 @@
-query exercise_4($id: ID!) {
-  user(id: $id) {
-    id
-    firstName
-  }
-}

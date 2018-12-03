@@ -1,5 +1,12 @@
-query exercise_5($id: ID!) {
-  user(id: $id) {
-    fullName
+query exercise_5($id1: ID!, $id2: ID!) {
+  repository1: repository(id: $id1) {
+    user {
+      firstName
+    }
+  }
+  repository2: repository(id: $id2) {
+    user {
+      firstName
+    }
   }
 }

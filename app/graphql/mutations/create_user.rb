@@ -1,0 +1,2 @@
+class Mutations::CreateUser
+end

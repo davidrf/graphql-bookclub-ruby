@@ -1,5 +1,0 @@
-query exercise_2 {
-  users {
-    id
-  }
-}

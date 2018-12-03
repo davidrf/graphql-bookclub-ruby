@@ -1,10 +1,6 @@
-query exercise_3 {
-  users {
-    bio
-    firstName
+query exercise_3($id: ID!) {
+  repository(id: $id) {
     id
-    lastName
-    pictureUrl
-    username
+    name
   }
 }

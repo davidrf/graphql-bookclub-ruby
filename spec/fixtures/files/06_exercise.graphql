@@ -1,6 +1,12 @@
-query exercise_6($id: ID!) {
-  repository(id: $id) {
-    id
-    name
+mutation exercise_6($input: CreateUserInput!) {
+  createUser(input: $input) {
+    user {
+      bio
+      firstName
+      id
+      lastName
+      pictureUrl
+      username
+    }
   }
 }
