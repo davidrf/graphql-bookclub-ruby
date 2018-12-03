@@ -17,7 +17,7 @@ RSpec.describe "exercise 6", type: :request do
   end
   let(:mutation_class) { Mutations::CreateUser }
 
-  xit "should return the expected response" do
+  it "should return the expected response" do
     expect(mutation_class).to receive(:perform).and_call_original
     post(graphql_url, headers: headers, params: params)
 

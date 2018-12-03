@@ -3,9 +3,11 @@ class Types::MutationType < Types::BaseObject
     argument :input, Types::CreateUserInputType, required: true
   end
   
-  def create_user(input:)
-    {
-      user: User.create(input.to_h)
-    }
+  def create_user(**args)
+    Mutations::CreateUser.perform(
+      **args,
+      context: context,
+      object: object,
+    )
   end
 end

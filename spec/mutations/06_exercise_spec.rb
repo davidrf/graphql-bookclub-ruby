@@ -12,7 +12,7 @@ RSpec.describe Mutations::CreateUser do
       { current_user: current_user }
     end
 
-    xit "should return a payload with a user" do
+    it "should return a payload with a user" do
       result = described_class.perform(context: context, input: input, object: nil)
 
       user = result[:user]
