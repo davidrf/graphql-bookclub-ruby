@@ -29,12 +29,11 @@ class Types::QueryType < Types::BaseObject
   field :repository, Types::RepositoryType, null: true do
     argument :id, ID, required: true
   end
-  def repository(id:)
-    Repository.find(id)
-  rescue ActiveRecord::RecordNotFound => error
-    raise GraphQL::ExecutionError.new(
-      error.message,
-      extensions: { "code" => "NOT_FOUND" }
+  def repository(**args)
+    Resolvers::QueryType::Repository.perform(
+      **args,
+      context: context,
+      object: object,
     )
   end
 end

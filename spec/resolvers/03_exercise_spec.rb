@@ -3,7 +3,7 @@ require 'rails_helper'
 # empty class has been defined in
 # app/graphql/resolvers/query_type/repository.rb
 RSpec.describe Resolvers::QueryType::Repository do
-  xdescribe ".perform" do
+  describe ".perform" do
     let!(:current_user) { create(:user) }
     let!(:repository_not_owned) { create(:repository) }
     let(:context) do
