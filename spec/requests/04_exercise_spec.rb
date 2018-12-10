@@ -21,7 +21,7 @@ RSpec.describe "exercise 04", type: :request do
     { query: query, variables: variables }
   end
 
-  xit "should return the expected response" do
+  it "should return the expected response" do
     # Get first 2
     post(graphql_url, headers: headers, params: params, as: :json)
 
