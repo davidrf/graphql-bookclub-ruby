@@ -29,7 +29,7 @@ RSpec.describe "exercise 01", type: :request do
 
   context "ascending direction" do
     let(:direction) { "ASC" }
-    xit "should return the expected response" do
+    it "should return the expected response" do
       post(graphql_url, headers: headers, params: params)
 
       expect(response).to have_http_status :ok
@@ -44,7 +44,7 @@ RSpec.describe "exercise 01", type: :request do
 
   context "descending direction" do
     let(:direction) { "DESC" }
-    xit "should return the expected response" do
+    it "should return the expected response" do
       post(graphql_url, headers: headers, params: params)
 
       expect(response).to have_http_status :ok
@@ -59,7 +59,7 @@ RSpec.describe "exercise 01", type: :request do
 
   context "orderBy not specified" do
     let(:order_by) { nil }
-    xit "should return the expected response" do
+    it "should return the expected response" do
       post(graphql_url, headers: headers, params: params)
 
       expect(response).to have_http_status :ok

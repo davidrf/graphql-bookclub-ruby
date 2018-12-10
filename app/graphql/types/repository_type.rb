@@ -3,7 +3,9 @@ class Types::RepositoryType < Types::BaseObject
     :collaborators_connection,
     Types::UserType.connection_type,
     null: false,
-  )
+  ) do
+    argument :order_by, Types::UserConnectionOrderInputType, required: false
+  end
   field :id, ID, null: false
   field :name, String, null: false
   field :user, Types::UserType, null: false
