@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe "exercise 05", type: :request do
+RSpec.describe "exercise 04", type: :request do
   let!(:current_user) { create(:user) }
   let!(:collaborators) { create_list(:user, 5) }
   let(:collaborator_ids) { collaborators.map(&:id) }
@@ -10,7 +10,7 @@ RSpec.describe "exercise 05", type: :request do
   let(:headers) do
     { "Authorization" => "bearer #{current_user.id}" }
   end
-  let(:query) { file_fixture("05_exercise.graphql").read }
+  let(:query) { file_fixture("04_exercise.graphql").read }
   let(:order_by) do
     { direction: "ASC", field: "USERNAME"}
   end
@@ -32,8 +32,8 @@ RSpec.describe "exercise 05", type: :request do
     connection = body.dig("data", "repository", "collaboratorsConnection")
     after = connection.dig("pageInfo", "endCursor")
     hasNextPage = connection.dig("pageInfo", "hasNextPage")
-    data_collaborators = connection.dig("collaborators")
-    users = data_collaborators&.map { |collaborator| collaborator }
+    edges = connection.dig("edges")
+    user_ids = edges&.map { |edge| edge.dig("node", "id") }
 
     expect(after).to be
     expect(hasNextPage).to eq(true)
@@ -46,8 +46,8 @@ RSpec.describe "exercise 05", type: :request do
     connection = body.dig("data", "repository", "collaboratorsConnection")
     after = connection.dig("pageInfo", "endCursor")
     hasNextPage = connection.dig("pageInfo", "hasNextPage")
-    data_collaborators = connection.dig("collaborators")
-    users += data_collaborators&.map { |collaborator| collaborator }
+    edges = connection.dig("edges")
+    user_ids += edges&.map { |edge| edge.dig("node", "id") }
 
     expect(after).to be
     expect(hasNextPage).to eq(true)
@@ -59,15 +59,10 @@ RSpec.describe "exercise 05", type: :request do
     body = response.parsed_body
     connection = body.dig("data", "repository", "collaboratorsConnection")
     hasNextPage = connection.dig("pageInfo", "hasNextPage")
-    data_collaborators = connection.dig("collaborators")
-    users += data_collaborators&.map { |collaborator| collaborator }
+    edges = connection.dig("edges")
+    user_ids += edges&.map { |edge| edge.dig("node", "id") }
 
     expect(hasNextPage).to eq(false)
-    expect(collaborators.count).to eq(users.count)
-    users.each do |user|
-      collaborator = collaborators.find { |collaborator| collaborator.id == user["id"] }
-      expect(collaborator).to be
-      expect(user["firstName"]).to eq(collaborator.first_name)
-    end
+    expect(user_ids).to eq(collaborator_ids)
   end
 end

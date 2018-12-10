@@ -10,11 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_01_221239) do
+ActiveRecord::Schema.define(version: 2018_12_09_195247) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
+
+  create_table "collaborations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "user_id", null: false
+    t.uuid "repository_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["repository_id", "user_id"], name: "index_collaborations_on_repository_id_and_user_id", unique: true
+    t.index ["repository_id"], name: "index_collaborations_on_repository_id"
+    t.index ["user_id"], name: "index_collaborations_on_user_id"
+  end
 
   create_table "repositories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name", null: false
@@ -35,5 +45,7 @@ ActiveRecord::Schema.define(version: 2018_12_01_221239) do
     t.index ["username"], name: "index_users_on_username", unique: true
   end
 
+  add_foreign_key "collaborations", "repositories"
+  add_foreign_key "collaborations", "users"
   add_foreign_key "repositories", "users"
 end

@@ -1,0 +1,7 @@
+query exercise_02($id: ID!) {
+  repository(id: $id) {
+    collaboratorsConnection {
+      totalCount
+    }
+  }
+}

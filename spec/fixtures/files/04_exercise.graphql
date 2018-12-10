@@ -6,9 +6,10 @@ query exercise_04(
 ) {
   repository(id: $id) {
     collaboratorsConnection(after: $after, first: $first, orderBy: $orderBy) {
-      collaborators {
-        id
-        firstName
+      edges {
+        node {
+          id
+        }
       }
       pageInfo {
         endCursor

@@ -1,6 +1,11 @@
-query exercise_1 {
-  currentUser {
-    id
-    firstName
+query exercise_01($id: ID!, $orderBy: UserConnectionOrderInput) {
+  repository(id: $id) {
+    collaboratorsConnection(orderBy: $orderBy) {
+      edges {
+        node {
+          id
+        }
+      }
+    }
   }
 }

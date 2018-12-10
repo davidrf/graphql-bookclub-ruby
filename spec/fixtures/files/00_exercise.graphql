@@ -1,6 +1,11 @@
-query exercise_0 {
-  currentUser {
-    id
-    firstName
+query exercise_00($id: ID!) {
+  repository(id: $id) {
+    collaboratorsConnection {
+      edges {
+        node {
+          id
+        }
+      }
+    }
   }
 }
