@@ -1,4 +1,9 @@
 class Types::RepositoryType < Types::BaseObject
+  field(
+    :collaborators_connection,
+    Types::UserType.connection_type,
+    null: false,
+  )
   field :id, ID, null: false
   field :name, String, null: false
   field :user, Types::UserType, null: false
@@ -7,6 +12,14 @@ class Types::RepositoryType < Types::BaseObject
     Resolvers::RepositoryType::User.perform(
       context: context,
       object: object,
+    )
+  end
+
+  def collaborators_connection(**args)
+    Resolvers::RepositoryType::CollaboratorsConnection.perform(
+      context: context,
+      object: object,
+      **args,
     )
   end
 end
