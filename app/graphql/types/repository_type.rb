@@ -1,7 +1,7 @@
 class Types::RepositoryType < Types::BaseObject
   field(
     :collaborators_connection,
-    Types::UserType.connection_type,
+    Types::RepositoryCollaboratorsConnectionType,
     null: false,
   ) do
     argument :order_by, Types::UserConnectionOrderInputType, required: false
